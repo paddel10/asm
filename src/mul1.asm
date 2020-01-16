@@ -1,3 +1,17 @@
+; mul1.asm
+    org 0x0100
+
+start:
+    mov al,0x03     ; load register AL with 0x03
+    mov cl,0x02     ; load register CL with 0x02
+    mul cl          ; multiply AL by CL, result into AX
+
+    add al,0x30     ; convert to ASCII digit
+
+    call display_letter
+
+; copy/paste from library1.asm
+    int 0x20            ; exit to command line.
 ;
 ; display letter contained in AL (ASCII code)
 ;
@@ -18,21 +32,3 @@ display_letter:
     pop bx
     pop ax
     ret                 ; returns to caller
-
-;
-; read keyboard into AL (ASCII code)
-;
-read_keyboard:
-    push bx
-    push cx
-    push dx
-    push si
-    push di
-    mov ah,0x00         ; load AH with code for keyboard read
-    int 0x16            ; call the BIOS for reading keyboard
-    pop di
-    pop si
-    pop dx
-    pop cx
-    pop bx
-    ret                 ; return to caller

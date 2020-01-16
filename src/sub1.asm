@@ -1,15 +1,15 @@
-; add1.asm
+; sub1.asm
     org 0x0100
 
 start:
-    mov al,0x00
     mov al,0x04         ; load register AL with 0x04
-    add al,0x03         ; add 0x03 to register AL
-    ;
+    sub al,0x03         ; subtract 0x03 to register AL
+
     add al,0x30         ; convert to ASCII digit
     call display_letter
 
-; copy/paste library1.asm
+; copy/paste from library1.asm
+    int 0x20            ; exit to command line.
 ;
 ; display letter contained in AL (ASCII code)
 ;

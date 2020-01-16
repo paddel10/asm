@@ -15,7 +15,7 @@ repeat:
     jmp repeat
 
 end:
-    int 0x20
+    int 0x20        ; exit to command line
 
 string:
     db "hello, world",0
