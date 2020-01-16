@@ -18,4 +18,4 @@ end:
     int 0x20
 
 string:
-    db "hello, patrick",0
+    db "hello, world",0
