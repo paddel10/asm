@@ -1,13 +1,9 @@
-; shift1.asm
+; logical1.asm
     org 0x0100
-    
 start:
-    mov al,0x02     ; load register AL with 0x02 (2 decimal)
-    ;shl al,1        ; shift AL left by one bit
+    mov al,0x32     ; load register AL with 0x32 (50 decimal)
+    and al,0x0f     ; logical AND AL with 0x0f
 
-    ; shift AL left by tow bits
-    ; mov cl,2
-    ; shl al,cl 
     add al,0x30     ; convert to ASCII digit
     call display_letter
 
@@ -33,4 +29,3 @@ display_letter:
     pop bx
     pop ax
     ret                 ; returns to caller
-

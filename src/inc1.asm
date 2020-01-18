@@ -1,15 +1,20 @@
-; shift1.asm
+; inc1.asm
     org 0x0100
-    
-start:
-    mov al,0x02     ; load register AL with 0x02 (2 decimal)
-    ;shl al,1        ; shift AL left by one bit
 
-    ; shift AL left by tow bits
-    ; mov cl,2
-    ; shl al,cl 
-    add al,0x30     ; convert to ASCII digit
+start:
+    mov al,0x30
+count1:
+    ; increment
     call display_letter
+    inc al
+    cmp al,0x39
+    jne count1
+count2:
+    ; decrement
+    call display_letter
+    dec al
+    cmp al,0x2f
+    jne count2
 
 ; copy/paste from library1.asm
     int 0x20            ; exit to command line.
@@ -33,4 +38,3 @@ display_letter:
     pop bx
     pop ax
     ret                 ; returns to caller
-
