@@ -4,19 +4,24 @@
 
     in al,(0x40)        ; read the time counter chip
     and al,0x07         ; mask bits so the value becomes 0-7
-    and al,0x30         ; convert into ASCII digit
+    add al,0x30         ; convert into ASCII digit
     mov cl,al           ; save AL into CL
+    call display_letter ; (optional) this line gives the answer
 
 game_loop:
-    mov al,0x3f         ; AL now is question-mark sign
+    mov al,'?'          ; AL now is question-mark sign
     call display_letter ; display
     call read_keyboard  ; read keyboard
     cmp al,cl           ; AL equals CL?
     jne game_loop       ; no, jumps (jump if not equal)
     call display_letter ; display number
-    mov al,0x3a         ; display happy face
+    mov al,' '
     call display_letter
-    mov al,0x29
+    mov al,':'          ; display happy face
+    call display_letter
+    mov al,'-'
+    call display_letter
+    mov al,')'
     call display_letter
 
 ; copy/paste from library1.asm
