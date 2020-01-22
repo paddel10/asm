@@ -68,10 +68,24 @@ divide_double_word_by_a_word:
 ```
 ; div.asm
     org 0x0100
+
 divide_word_by_a_word:
     mov dx,0x00         ; set 0x00 in DX
     mov ax,0x1304       ; set 0x1304 in AX
     mov cx,0x0200       ; set 0x0200 in CX
     div cx              ; divide 0x1304 (4868d) by 0x0200 (512d)
+```
+## Newline/carriage return
+```
+; div.asm
+    org 0x0100
+
+newline:
+    mov ah, 02h
+    mov dl, 13
+    int 21h
+    mov dl, 10
+    int 21h 
+    ret
 ```
 
