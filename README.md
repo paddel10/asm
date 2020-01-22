@@ -29,3 +29,49 @@ start:
 end:
     int 0x20            ; exit to command line.
 ```
+
+## DIV
+### divide unsigned word by a byte
+```
+; div.asm
+    org 0x0100
+
+divide_unsigned_word_by_a_byte:
+    mov ah,0x01         ; set 0x01 in AH
+    mov al,0x04         ; set 0x04 in AL
+    mov cl,0x02         ; set 0x02 in CL
+    div cl              ; divide 0x0104 by 0x02
+```
+#### divide byte by a byte
+```
+; div.asm
+    org 0x0100
+
+divide_byte_by_a_byte:
+    mov ah,0x00         ; set 0x00 in AH
+    mov al,0x04         ; set 0x04 in AL
+    mov cl,0x02         ; set 0x02 in CL
+    div cl              ; divide 0x0004 by 0x02
+```
+### divide unsigned double word by a word
+```
+; div.asm
+    org 0x0100
+
+divide_double_word_by_a_word:
+    mov dx,0x0001       ; set 0x0001 in DX
+    mov ax,0x0104       ; set 0x0104 in AX
+    mov cx,0x0200       ; set 0x0200 in CX
+    div cx              ; divide 0x10104 (65796) by 0x0200 (512)
+```
+#### divide word by a word
+```
+; div.asm
+    org 0x0100
+divide_word_by_a_word:
+    mov dx,0x00         ; set 0x00 in DX
+    mov ax,0x1304       ; set 0x1304 in AX
+    mov cx,0x0200       ; set 0x0200 in CX
+    div cx              ; divide 0x1304 (4868d) by 0x0200 (512d)
+```
+
