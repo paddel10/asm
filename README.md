@@ -78,8 +78,9 @@ divide_word_by_a_word:
     div cx              ; divide 0x1304 (4868d) by 0x0200 (512d)
 ```
 ## Newline/carriage return
+### Plain implementation
 ```
-; div.asm
+; newline.asm
     org 0x0100
 
 newline:
@@ -90,4 +91,16 @@ newline:
     int 21h 
     ret
 ```
+### Using helper function
+```
+; newline.asm
+    org 0x0100
+
+newline:
+    mov al,0x0d             ; print carriage return/linefeed
+    call display_letter     ; see library2.asm
+    mov al,0x0a
+    call display_letter
+```
+
 

@@ -19,7 +19,7 @@ display_number:
 display_number_1:
     pop ax          ; load AX with value from stack
     add al,'0'      ; convert remainder to ASCII digit
-    call display_number ; display on the screen
+    call display_letter ; display on the screen
     ret
 newline:
     mov ah, 02h
@@ -27,4 +27,11 @@ newline:
     int 21h
     mov dl, 10
     int 21h 
+    ret
+
+newline2:
+    mov al,0x0d
+    call display_letter
+    mov al,0x0a
+    call display_letter
     ret
