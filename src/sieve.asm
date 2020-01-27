@@ -7,7 +7,7 @@
 
 table:      equ 0x8000      ; define variable at
                             ; address 0x8000 (need to init)
-table_size  equ 1000        ; define variable
+table_size: equ 1000        ; define variable
 
 init:
     mov bx,table            ; BX = table address

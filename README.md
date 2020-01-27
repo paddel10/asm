@@ -31,13 +31,41 @@ start:
 end:
     int 0x20            ; exit to command line.
 ```
+## Variables
+```
+table:      equ 0x8000      ; define variable at
+                            ; address 0x8000 (need to init)
+table_size: equ 1000        ; define variable
+```
+### Initialize list
+```
+init:
+    mov bx,table            ; BX = table address
+    mov cx,table_size       ; assign variable table_size to CX
+    mov al,0                ; init AL
+
+; initialize table with zeros
+p1:
+    mov [bx],al             ; write AL into the address pointed by BX
+    inc bx                  ; increase BX (pointer)
+    loop p1                 ; decrease CX, jump if non-zero
+```
+## Comparison
+CMP subtracts a byte/word from the specified source (number, register, memory location) with a byte/word from a specified destination (register, memory location). Only flags are updated: AF, OF, SF, ZF, PF, CF
+Source and destination can't be memory locations at the same time.
+
+## Conditional jumps
+Used together with a prior comparison. A few examples of conditional jumps
+| Opcode | Description | Condition for jump |
+| --- | --- | --- |
+| JE/JZ | jump if equal/jump if zero flag | ZF = 0 |
+| JC | jump if carry | CF = 1 |
+| JNC | jump if no carry | CF = 0 |
+| JNE/JNZ | jump if not equal/jump if not zero | ZF = 0 |
 
 ## DIV
 ### divide unsigned word by a byte
 ```
-; div.asm
-    org 0x0100
-
 divide_unsigned_word_by_a_byte:
     mov ah,0x01         ; set 0x01 in AH
     mov al,0x04         ; set 0x04 in AL
@@ -46,9 +74,6 @@ divide_unsigned_word_by_a_byte:
 ```
 #### divide byte by a byte
 ```
-; div.asm
-    org 0x0100
-
 divide_byte_by_a_byte:
     mov ah,0x00         ; set 0x00 in AH
     mov al,0x04         ; set 0x04 in AL
@@ -57,9 +82,6 @@ divide_byte_by_a_byte:
 ```
 ### divide unsigned double word by a word
 ```
-; div.asm
-    org 0x0100
-
 divide_double_word_by_a_word:
     mov dx,0x0001       ; set 0x0001 in DX
     mov ax,0x0104       ; set 0x0104 in AX
@@ -68,9 +90,6 @@ divide_double_word_by_a_word:
 ```
 #### divide word by a word
 ```
-; div.asm
-    org 0x0100
-
 divide_word_by_a_word:
     mov dx,0x00         ; set 0x00 in DX
     mov ax,0x1304       ; set 0x1304 in AX
@@ -80,9 +99,6 @@ divide_word_by_a_word:
 ## Newline/carriage return
 ### Plain implementation
 ```
-; newline.asm
-    org 0x0100
-
 newline:
     mov ah,02h
     mov dl,13
@@ -93,9 +109,6 @@ newline:
 ```
 ### Using helper function
 ```
-; newline.asm
-    org 0x0100
-
 newline:
     mov al,0x0d             ; print carriage return/linefeed
     call display_letter     ; see library2.asm
