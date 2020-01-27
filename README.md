@@ -56,6 +56,7 @@ Source and destination can't be memory locations at the same time.
 
 ## Conditional jumps
 Used together with a prior comparison. A few examples of conditional jumps
+
 | Opcode | Description | Condition for jump |
 | --- | --- | --- |
 | JE/JZ | jump if equal/jump if zero flag | ZF = 0 |
