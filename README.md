@@ -63,7 +63,20 @@ Used together with a prior comparison. A few examples of conditional jumps
 | JC | jump if carry | CF = 1 |
 | JNC | jump if no carry | CF = 0 |
 | JNE/JNZ | jump if not equal/jump if not zero | ZF = 0 |
+| JCXZ | jump if CX is zero | |
+| loop | decrement CX and jump if non-zero | |
 
+### Example
+```mov``` instructions do not affect flags
+```
+compare:
+    cmp ax,5        ; AX is 5?
+    mov bx,0x3333   ; load BX with 0x3333
+    jz label        ; jump if zero (equal)
+    mov bx,0x5555   ; (else) load BX with 0x5555
+label:
+    nop
+```
 ## DIV
 ### divide unsigned word by a byte
 ```
@@ -115,6 +128,15 @@ newline:
     call display_letter     ; see library2.asm
     mov al,0x0a
     call display_letter
+```
+
+## Memory
+```
+add_two_registers:
+    mov bx,board
+    mov al,[bx+si+5]    ; add registers
+    ; ... we did something with AL
+    mov [bx+si+5],al    ; save result
 ```
 
 
